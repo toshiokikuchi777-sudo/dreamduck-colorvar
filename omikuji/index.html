@@ -186,6 +186,17 @@
   .btn:hover { background: var(--gold); color: white; }
   .btn-primary { background: var(--gold); color: white; }
   .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+  .btn-redraw {
+    border-color: var(--ink-soft); color: var(--ink-soft);
+  }
+  .btn-redraw:hover { background: var(--ink-soft); color: white; }
+  .redraw-note {
+    font-family: "Cormorant Garamond", serif; font-style: italic;
+    font-size: 12px; color: var(--gold); letter-spacing: 0.15em;
+    margin-bottom: 18px; padding: 8px 12px;
+    background: rgba(184,150,92,0.08); border-radius: 2px;
+  }
+  .result-share { flex-wrap: wrap; }
 
   .secret-badge {
     display: inline-block; background: linear-gradient(135deg, #FFE699, #DFC893);
@@ -274,8 +285,11 @@
     grid.appendChild(card);
   });
 
+  // Redraw state: session-wide, 1回まで
+  let redrawUsed = false;
+
   // Show fortune
-  function showFortune(id, d) {
+  function showFortune(id, d, opts = {}) {
     const modal = document.getElementById('modal');
     const body = document.getElementById('modalBody');
     modal.classList.add('open');
@@ -284,14 +298,22 @@
     body.innerHTML = `
       <div class="drawing">
         <img class="drawing-duck" src="../images/duck_${id}.png" alt="">
-        <div class="drawing-msg">Drawing...</div>
+        <div class="drawing-msg">${opts.random ? 'Re-drawing...' : 'Drawing...'}</div>
       </div>
     `;
 
     setTimeout(() => {
-      const idx = hashSeed(id + dateStr) % d.fortunes.length;
+      const seedIdx = hashSeed(id + dateStr) % d.fortunes.length;
+      let idx;
+      if (opts.random) {
+        const candidates = d.fortunes.map((_, i) => i).filter(i => i !== seedIdx);
+        idx = candidates[Math.floor(Math.random() * candidates.length)];
+      } else {
+        idx = seedIdx;
+      }
       const f = d.fortunes[idx];
       const isSecret = d.secret;
+      const showRedrawBtn = !redrawUsed && !opts.random;
 
       body.innerHTML = `
         <img class="result-img" src="../images/duck_${id}.png" alt="${d.name}">
@@ -314,13 +336,21 @@
           </div>
         </div>
         <div class="result-match">今日のあなたと相性がいい色は <strong>${f.match}</strong></div>
+        ${opts.random ? '<div class="redraw-note">★ 引き直し結果（このセッション限り）</div>' : ''}
         <div class="result-share">
+          ${showRedrawBtn ? '<button class="btn btn-redraw" id="redrawBtn">もう一度引く（残り1回）</button>' : ''}
           <a class="btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`今日の${d.name}ダック占い: ${f.level}\n「${f.msg}」\n#ドリームダック #DreamDuck`)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">Xでシェア</a>
           <button class="btn btn-primary" id="closeBtn">閉じる</button>
         </div>
       `;
       document.getElementById('closeBtn').addEventListener('click', closeModal);
-    }, 1300);
+      if (showRedrawBtn) {
+        document.getElementById('redrawBtn').addEventListener('click', () => {
+          redrawUsed = true;
+          showFortune(id, d, { random: true });
+        });
+      }
+    }, opts.random ? 900 : 1300);
   }
 
   function closeModal() {
