@@ -363,6 +363,54 @@
     .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .legend { display: none; }
   }
+
+  .omikuji-cta {
+    display: flex; align-items: center; gap: 18px;
+    max-width: 720px; margin: 40px auto 0;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, #FFF8E1 0%, #F5EFE0 50%, #E8DAB0 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 4px;
+    text-decoration: none; color: var(--ink);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative; overflow: hidden;
+  }
+  .omikuji-cta::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 30%, rgba(255,255,255,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .omikuji-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(184,150,92,0.25);
+  }
+  .omikuji-cta .cta-icon {
+    font-size: 32px; flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(184,150,92,0.3));
+  }
+  .omikuji-cta .cta-label {
+    flex: 1; display: flex; flex-direction: column; gap: 4px;
+  }
+  .omikuji-cta .cta-eyebrow {
+    font-family: "Cormorant Garamond", serif; font-style: italic;
+    font-size: 11px; letter-spacing: 0.25em; color: var(--gold);
+    text-transform: uppercase;
+  }
+  .omikuji-cta .cta-main {
+    font-size: 17px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .omikuji-cta .cta-arrow {
+    font-family: "Cormorant Garamond", serif; font-size: 24px;
+    color: var(--gold); flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .omikuji-cta:hover .cta-arrow { transform: translateX(6px); }
+  @media (max-width: 480px) {
+    .omikuji-cta { padding: 18px 18px; gap: 14px; }
+    .omikuji-cta .cta-main { font-size: 14px; }
+    .omikuji-cta .cta-icon { font-size: 26px; }
+  }
 </style>
 </head>
 <body>
@@ -392,6 +440,15 @@
       <div class="body">⑧ビビッドイエロー（チャンス運）が「核」、⑬オーロラクリアが「シークレット」。</div>
     </div>
   </div>
+
+  <a href="omikuji/" class="omikuji-cta">
+    <span class="cta-icon">🔮</span>
+    <span class="cta-label">
+      <span class="cta-eyebrow">Dream Duck Omikuji ／ 体験プロト公開中</span>
+      <span class="cta-main">今日のあなたのDuck占いを引く</span>
+    </span>
+    <span class="cta-arrow">→</span>
+  </a>
 </header>
 
 <main>
