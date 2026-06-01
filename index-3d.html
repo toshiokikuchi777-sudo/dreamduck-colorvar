@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ドリームダック カラバリ仕様書｜全13色</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf6f0;
+    --bg-soft: #f5ede2;
+    --ink: #2a2622;
+    --ink-soft: #5b544c;
+    --line: #e6dcc9;
+    --accent: #c89d63;
+    --accent-soft: #f0e4cf;
+    --gold: #b8924a;
+    --secret: #6b5b8a;
+    --hero: #d65a5a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background:
+      radial-gradient(ellipse at 30% 20%, #fff6e6 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, #f3e6d4 0%, transparent 60%),
+      var(--bg);
+    padding: 80px 40px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+
+  .sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+  }
+  .meta-row span strong {
+    color: var(--ink);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* ===== LEGEND ===== */
+  .legend {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .legend-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    border-radius: 4px;
+  }
+  .legend-card .title {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .legend-card .body {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ===== GRID ===== */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 24px 40px;
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 40px 0 32px;
+    position: relative;
+  }
+  .section-title::before,
+  .section-title::after {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    vertical-align: middle;
+    margin: 0 20px;
+  }
+  .section-title span {
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(40,30,15,.08);
+  }
+
+  .card.hero { border: 2px solid var(--hero); }
+  .card.secret { border: 2px solid var(--secret); background: linear-gradient(180deg, #fff 0%, #f5f0fa 100%); }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.2em;
+    font-family: "Noto Sans JP", sans-serif;
+    z-index: 2;
+  }
+  .badge.hero { background: var(--hero); }
+  .badge.secret { background: var(--secret); }
+
+  .card-no {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    z-index: 2;
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f8f3ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== SLIDESHOW (3D renders) ===== */
+  .slideshow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .photo .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 5%;
+    opacity: 0;
+    transition: opacity .7s ease;
+  }
+  .photo .slide.on { opacity: 1; }
+  .dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    z-index: 3;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, .22);
+    cursor: pointer;
+    transition: background .3s ease, transform .3s ease;
+  }
+  .dot.on { background: var(--gold); transform: scale(1.35); }
+  .card.hero .dot.on { background: var(--hero); }
+  .card.secret .dot.on { background: var(--secret); }
+
+  .card-body {
+    padding: 22px 22px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name-jp {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .pantone-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .pantone-chip {
+    width: 42px;
+    height: 60px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    flex-shrink: 0;
+  }
+  .pantone-chip.none {
+    background: repeating-linear-gradient(45deg, #fff, #fff 4px, #f0e8d8 4px, #f0e8d8 8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--ink-soft);
+  }
+
+  .luck {
+    background: var(--accent-soft);
+    color: var(--gold);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-family: "Noto Sans JP", sans-serif;
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
+  .card.hero .luck { background: #fde2e2; color: var(--hero); }
+  .card.secret .luck { background: #ece4f5; color: var(--secret); }
+
+  .copy {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 18px;
+    min-height: 3em;
+  }
+
+  .form-row {
+    border-top: 1px dashed var(--line);
+    padding-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .form-cell {
+    text-align: center;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+  .form-cell .label {
+    display: block;
+    font-size: 9px;
+    color: var(--gold);
+    margin-bottom: 4px;
+    letter-spacing: 0.15em;
+  }
+  .form-cell .val {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 11px;
+  }
+  .form-cell.diff .val {
+    color: var(--hero);
+    font-weight: 700;
+  }
+
+  /* ===== NOTES ===== */
+  .notes {
+    max-width: 1000px;
+    margin: 60px auto 0;
+    padding: 40px 32px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .notes h2 {
+    font-size: 18px;
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    color: var(--gold);
+  }
+  .notes ol {
+    padding-left: 24px;
+  }
+  .notes li {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+  .notes li strong { color: var(--hero); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.25em;
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  footer .org {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    margin-top: 6px;
+    letter-spacing: 0.3em;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: #fff; }
+    header { padding: 30px 20px; }
+    .card:hover { transform: none; box-shadow: none; }
+    .card { break-inside: avoid; box-shadow: none; }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .legend { display: none; }
+  }
+
+  .omikuji-cta {
+    display: flex; align-items: center; gap: 18px;
+    max-width: 720px; margin: 40px auto 0;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, #FFF8E1 0%, #F5EFE0 50%, #E8DAB0 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 4px;
+    text-decoration: none; color: var(--ink);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative; overflow: hidden;
+  }
+  .omikuji-cta::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 30%, rgba(255,255,255,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .omikuji-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(184,150,92,0.25);
+  }
+  .omikuji-cta .cta-icon {
+    font-size: 32px; flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(184,150,92,0.3));
+  }
+  .omikuji-cta .cta-label {
+    flex: 1; display: flex; flex-direction: column; gap: 4px;
+  }
+  .omikuji-cta .cta-eyebrow {
+    font-family: "Cormorant Garamond", serif; font-style: italic;
+    font-size: 11px; letter-spacing: 0.25em; color: var(--gold);
+    text-transform: uppercase;
+  }
+  .omikuji-cta .cta-main {
+    font-size: 17px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .omikuji-cta .cta-arrow {
+    font-family: "Cormorant Garamond", serif; font-size: 24px;
+    color: var(--gold); flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .omikuji-cta:hover .cta-arrow { transform: translateX(6px); }
+  @media (max-width: 480px) {
+    .omikuji-cta { padding: 18px 18px; gap: 14px; }
+    .omikuji-cta .cta-main { font-size: 14px; }
+    .omikuji-cta .cta-icon { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Lyric × MASTAR DESIGN</div>
+  <h1>ドリームダック カラバリ仕様</h1>
+  <div class="sub">DREAM DUCK ／ COLOR VARIATION REFERENCE</div>
+  <div class="meta-row">
+    <span><strong>13</strong>カラー</span>
+    <span><strong>12</strong>レギュラー＋<strong>1</strong>シークレット</span>
+    <span>フォルム<strong>27</strong>通りから選抜</span>
+    <span>本体サイズ <strong>約 60 × 60 × 60 mm</strong></span>
+    <span>2026.05.26 受領</span>
+  </div>
+
+  <div class="legend">
+    <div class="legend-card">
+      <div class="title">運気テーマ</div>
+      <div class="body">全13色に「運の名前」と「1行コピー」を付与。おみくじ／おまもり的世界観の設計。</div>
+    </div>
+    <div class="legend-card">
+      <div class="title">フォルムパターン</div>
+      <div class="body">目3種 × 嘴3種 × 羽3種 × 毛2種 ＝ 全27通りからカラーごとに選抜。</div>
+    </div>
+    <div class="legend-card">
+      <div class="title">核 / シークレット</div>
+      <div class="body">⑧ビビッドイエロー（チャンス運）が「核」、⑬オーロラクリアが「シークレット」。</div>
+    </div>
+  </div>
+
+  <a href="omikuji/" class="omikuji-cta">
+    <span class="cta-icon">🔮</span>
+    <span class="cta-label">
+      <span class="cta-eyebrow">Dream Duck Omikuji ／ 体験プロト公開中</span>
+      <span class="cta-main">今日のあなたのDuck占いを引く</span>
+    </span>
+    <span class="cta-arrow">→</span>
+  </a>
+</header>
+
+<main>
+  <div class="section-title"><span>レギュラー 12 カラー</span></div>
+
+  <div class="grid">
+
+    <!-- 01 -->
+    <div class="card">
+      <div class="card-no">01</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_01_1.png" alt="ソフトホワイト">
+        <img class="slide" src="images_3d/duck_01_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_01_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ソフトホワイト</div>
+        <div class="pantone-line">
+          <div class="pantone-chip none">no chip</div>
+          <span>乳白色／指定なし</span>
+        </div>
+        <div class="luck">リセット運</div>
+        <div class="copy">そのままでいい日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell diff"><span class="label">嘴</span><span class="val">よだれ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="card">
+      <div class="card-no">02</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_02_1.png" alt="クリームイエロー">
+        <img class="slide" src="images_3d/duck_02_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_02_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">クリームイエロー</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_02.png')"></div>
+          <span>PANTONE 0131C</span>
+        </div>
+        <div class="luck">やわらぎ運</div>
+        <div class="copy">少し気持ちが軽くなる日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="card">
+      <div class="card-no">03</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_03_1.png" alt="ハートフェルトピンク">
+        <img class="slide" src="images_3d/duck_03_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_03_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ハートフェルトピンク</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_03.png')"></div>
+          <span>PANTONE 698C</span>
+        </div>
+        <div class="luck">愛され運</div>
+        <div class="copy">やさしさが伝わる日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell diff"><span class="label">羽</span><span class="val">胸ハート</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="card">
+      <div class="card-no">04</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_04_1.png" alt="ムードグラデーションピンク">
+        <img class="slide" src="images_3d/duck_04_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_04_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ムードグラデーションピンク</div>
+        <div class="pantone-line">
+          <div class="pantone-chip none">no chip</div>
+          <span>濃→薄ピンクのグラデ</span>
+        </div>
+        <div class="luck">流れ運</div>
+        <div class="copy">変化にまかせてOK。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="card">
+      <div class="card-no">05</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_05_1.png" alt="ベビーブルー">
+        <img class="slide" src="images_3d/duck_05_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_05_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ベビーブルー</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_05.png')"></div>
+          <span>PANTONE 635C</span>
+        </div>
+        <div class="luck">整え運</div>
+        <div class="copy">静かに整う日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">開き</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="card">
+      <div class="card-no">06</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_06_1.png" alt="ミントグリーン">
+        <img class="slide" src="images_3d/duck_06_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_06_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ミントグリーン</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_06.png')"></div>
+          <span>PANTONE 344C</span>
+        </div>
+        <div class="luck">リフレッシュ運</div>
+        <div class="copy">深呼吸で流れが変わる。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">開き</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="card">
+      <div class="card-no">07</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_07_1.png" alt="ラベンダー">
+        <img class="slide" src="images_3d/duck_07_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_07_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ラベンダー</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_07.png')"></div>
+          <span>PANTONE 2635C</span>
+        </div>
+        <div class="luck">ゆるめ運</div>
+        <div class="copy">力を抜くとうまくいく。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell diff"><span class="label">嘴</span><span class="val">よだれ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 - 核 -->
+    <div class="card hero">
+      <span class="badge hero">CORE</span>
+      <div class="card-no">08</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_08_1.png" alt="ビビッドイエロー">
+        <img class="slide" src="images_3d/duck_08_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_08_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ビビッドイエロー <span style="color:var(--hero);font-size:11px;">（核）</span></div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_08.png')"></div>
+          <span>PANTONE 012C</span>
+        </div>
+        <div class="luck">チャンス運</div>
+        <div class="copy">動けば運がひらく。</div>
+        <div class="form-row">
+          <div class="form-cell diff"><span class="label">目</span><span class="val">ウィンク</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="card">
+      <div class="card-no">09</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_09_1.png" alt="ピュアレッド">
+        <img class="slide" src="images_3d/duck_09_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_09_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ピュアレッド</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_09.png')"></div>
+          <span>PANTONE 185C</span>
+        </div>
+        <div class="luck">勝負運</div>
+        <div class="copy">迷わず進んでいい日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell diff"><span class="label">羽</span><span class="val">ハート開</span></div>
+          <div class="form-cell diff"><span class="label">毛</span><span class="val">あり</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="card-no">10</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_10_1.png" alt="アンバー">
+        <img class="slide" src="images_3d/duck_10_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_10_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">アンバー</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_10.png')"></div>
+          <span>PANTONE 130C</span>
+        </div>
+        <div class="luck">あたため運</div>
+        <div class="copy">じんわり満たされる日。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">開き</span></div>
+          <div class="form-cell diff"><span class="label">羽</span><span class="val">ハート開</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <div class="card-no">11</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_11_1.png" alt="ダスティブラック">
+        <img class="slide" src="images_3d/duck_11_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_11_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ダスティブラック</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_11.png')"></div>
+          <span>PANTONE 547C</span>
+        </div>
+        <div class="luck">守り運</div>
+        <div class="copy">無理しないが正解。</div>
+        <div class="form-row">
+          <div class="form-cell"><span class="label">目</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">閉じ</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <div class="card-no">12</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_12_1.png" alt="ブライトブルー">
+        <img class="slide" src="images_3d/duck_12_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_12_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">ブライトブルー</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_12.png')"></div>
+          <span>PANTONE 2935C</span>
+        </div>
+        <div class="luck">スタート運</div>
+        <div class="copy">思いきって動く日。</div>
+        <div class="form-row">
+          <div class="form-cell diff"><span class="label">目</span><span class="val">ウィンク</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">開き</span></div>
+          <div class="form-cell diff"><span class="label">羽</span><span class="val">ハート開</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="margin-top:80px;"><span>シークレット</span></div>
+
+  <div class="grid" style="grid-template-columns: minmax(280px, 380px); justify-content: center;">
+    <!-- 13 SECRET -->
+    <div class="card secret">
+      <span class="badge secret">SECRET</span>
+      <div class="card-no" style="color:var(--secret);">13</div>
+      <div class="photo"><div class="slideshow">
+        <img class="slide on" src="images_3d/duck_13_1.png" alt="オーロラクリア">
+        <img class="slide" src="images_3d/duck_13_2.png" alt="" loading="lazy">
+        <img class="slide" src="images_3d/duck_13_3.png" alt="" loading="lazy">
+        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div></div>
+      <div class="card-body">
+        <div class="name-jp">オーロラクリア</div>
+        <div class="pantone-line">
+          <div class="pantone-chip" style="background-image:url('images/pantone_08.png')"></div>
+          <span>PANTONE 012C ※⑧と重複表記・要確認</span>
+        </div>
+        <div class="luck">ミラクル運</div>
+        <div class="copy">夢みたいなことが起こるかも。</div>
+        <div class="form-row">
+          <div class="form-cell diff"><span class="label">目</span><span class="val">開き</span></div>
+          <div class="form-cell"><span class="label">嘴</span><span class="val">開き</span></div>
+          <div class="form-cell"><span class="label">羽</span><span class="val">真横</span></div>
+          <div class="form-cell"><span class="label">毛</span><span class="val">なし</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  DREAM DUCK COLOR VARIATION REFERENCE ／ 2026.05.26
+  <div class="org">Lyric Inc. × MASTAR DESIGN</div>
+</footer>
+
+<script>
+(function () {
+  function go(slides, dots, from, to) {
+    slides[from].classList.remove('on');
+    dots[from].classList.remove('on');
+    slides[to].classList.add('on');
+    dots[to].classList.add('on');
+  }
+  document.querySelectorAll('.slideshow').forEach(function (show, idx) {
+    var slides = Array.prototype.slice.call(show.querySelectorAll('.slide'));
+    var dots = Array.prototype.slice.call(show.querySelectorAll('.dot'));
+    if (slides.length < 2) return;
+    var i = 0, paused = false;
+    show.addEventListener('mouseenter', function () { paused = true; });
+    show.addEventListener('mouseleave', function () { paused = false; });
+    dots.forEach(function (dot, d) {
+      dot.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (d === i) return;
+        go(slides, dots, i, d);
+        i = d;
+      });
+    });
+    setTimeout(function () {
+      setInterval(function () {
+        if (paused) return;
+        var next = (i + 1) % slides.length;
+        go(slides, dots, i, next);
+        i = next;
+      }, 2600);
+    }, idx * 400);
+  });
+})();
+</script>
+
+</body>
+</html>
